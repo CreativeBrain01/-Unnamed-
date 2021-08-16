@@ -1,1 +1,19 @@
-I made this change for goldsworthy
+const express = require('express');
+const pug = require('pug');
+const routes = require('./routes/routes');
+const path = require('path');
+
+const app = express();
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+let urlencodedParser = express.urlencoded
+({
+    extended: false
+});
+
+app.get('/', routes.index);
+
+app.listen(3000);
