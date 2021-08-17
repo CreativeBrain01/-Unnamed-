@@ -1,0 +1,54 @@
+extends layout
+
+block content 
+    form(id='form' method='post' action='/create')
+        p Username: 
+            input(type='text' name='name')
+        p Password: 
+            input(type='password' name='age')
+        p Email: 
+            input(type='email' name='email')
+        p Age: 
+            input(type='text')
+        
+        p Question 1: Are you a human
+            p
+                input(type='radio' id="1ans1" name="q1") 
+                label(for="1ans1") ans1 
+            p
+                input(type='radio' id="1ans2" name="q1")
+                label(for="1ans2") ans2 
+            p
+                input(type='radio' id="1ans3" name="q1")
+                label(for="1ans3") ans3 
+            p
+                input(type='radio' id="1ans4" name="q1")
+                label(for="1ans4") ans4 
+        p Question 2: what is reality
+            p
+                input(type='radio' id="2ans1" name="q2") 
+                label(for="2ans1") ans1 
+            p
+                input(type='radio' id="2ans2" name="q2")
+                label(for="2ans2") ans2 
+            p
+                input(type='radio' id="2ans3" name="q2")
+                label(for="2ans3") ans3 
+            p
+                input(type='radio' id="2ans4" name="q2")
+                label(for="2ans4") ans4 
+        p Question 3: uhhhh idk
+            p
+                input(type='radio' id="3ans1" name="q3") 
+                label(for="3ans1") ans1 
+            p
+                input(type='radio' id="3ans2" name="q3")
+                label(for="3ans2") ans2 
+            p
+                input(type='radio' id="3ans3" name="q3")
+                label(for="3ans3") ans3 
+            p
+                input(type='radio' id="3ans4" name="q3")
+                label(for="3ans4") ans4 
+        p 
+            input(type='submit' value='Add Person')

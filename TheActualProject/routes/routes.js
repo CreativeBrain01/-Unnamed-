@@ -31,8 +31,71 @@ exports.index = (req, res) =>
         if(err) return console.error(err);
         res.render('index', 
         {
-            title: 'People List',
+            title: 'Home Page',
             people: person
         });
     });
 };
+
+exports.create = (req, res) =>
+{
+    res.render('create', 
+    {
+        title: 'Add User'
+    })
+}
+
+exports.createPerson= (req, res) =>
+{
+    let person = new Person({
+        name: req.body.name,
+        age: req.body.age,
+        species: req.body.species
+    });
+    
+    person.save((err, person) => {
+        if(err) return console.error(err);
+        console.log(req.body.name + ' created');
+    });
+    res.redirect('/');
+};
+
+exports.edit= (req,res) =>
+{
+    Person.findById(req.params.id, (err, person) =>
+    {
+        if(err) return console.error(err);
+        res.render('edit', 
+        {
+            title: 'Edit User',
+            person
+        });
+    });
+};
+
+exports.editPerson = (req,res) =>
+{
+    Person.findById(req.params.id, (err, person) =>
+    {
+        if(err) return console.error(err);
+        person.name = req.body.name;
+        person.age = req.body.age;
+        person.species = req.body.species;
+        person.save((err, person) =>
+        {
+            if(err) return console.error(err);
+            console.log(req.body.name + ' updated!');
+        });
+    });
+    res.redirect('/');
+};
+
+exports.delete = (req,res) =>
+{
+    Person.findByIdAndDelete(req.params.id, (err, person) =>
+    {
+        if(err) return console.error(err);
+        console.log(person.name + ' deleted!');
+    });
+    res.redirect('/');
+}
