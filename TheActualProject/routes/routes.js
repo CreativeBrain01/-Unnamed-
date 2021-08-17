@@ -55,7 +55,7 @@ exports.createUser = (req, res) =>
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        age: req.body.email,
+        age: req.body.age,
         q1: req.body.q1,
         q2: req.body.q2,
         q3: req.body.q3
@@ -86,9 +86,13 @@ exports.editUser = (req,res) =>
     UserCollection.findById(req.params.id, (err, user) =>
     {
         if(err) return console.error(err);
-        user.name = req.body.name;
-        user.birthday = req.body.birthday;
-        user.password = req.body.password;
+        username: req.body.username;
+        password: req.body.password;
+        email: req.body.email;
+        age: req.body.age;
+        q1: req.body.q1;
+        q2: req.body.q2;
+        q3: req.body.q3;
         user.save((err, user) =>
         {
             if(err) return console.error(err);
