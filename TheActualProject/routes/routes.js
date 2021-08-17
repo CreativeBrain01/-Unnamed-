@@ -26,11 +26,11 @@ let userSchema = mongoose.Schema
     q3: String
 });
 
-let User = mongoose.model('User_Collection', userSchema);
+let UserCollection = mongoose.model('User_Collection', userSchema);
 
 exports.index = (req, res) => 
 {
-    User.find((err, user) =>
+    UserCollection.find((err, user) =>
     {
         if(err) return console.error(err);
         res.render('index', 
