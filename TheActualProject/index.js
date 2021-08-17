@@ -2,7 +2,6 @@ const express = require('express');
 const pug = require('pug');
 const routes = require('./routes/routes');
 const path = require('path');
-//const { ppid } = require('process');
 
 const app = express();
 
@@ -17,9 +16,9 @@ let urlencodedParser = express.urlencoded
 
 app.get('/', routes.index);
 app.get('/create', routes.create);
-app.post('/create', urlencodedParser, routes.createPerson);
+app.post('/create', urlencodedParser, routes.createUser);
 app.get('/edit/:id', routes.edit);
-app.post('/edit/:id', urlencodedParser, routes.editPerson);
+app.post('/edit/:id', urlencodedParser, routes.editUser);
 app.get('/delete/:id', routes.delete);
 
 app.listen(3000);
