@@ -52,9 +52,13 @@ exports.create = (req, res) =>
 exports.createUser = (req, res) =>
 {
     let user = new UserCollection({
-        name: req.body.name,
-        birthday: req.body.birthday,
-        password: req.body.password
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email,
+        age: req.body.email,
+        q1: req.body.q1,
+        q2: req.body.q2,
+        q3: req.body.q3
     });
     
     user.save((err, user) => {
