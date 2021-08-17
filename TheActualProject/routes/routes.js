@@ -15,24 +15,28 @@ let mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, "connection error"));
 mdb.once('open', callback => {});
 
-let personSchema = mongoose.Schema
+let userSchema = mongoose.Schema
 ({
-    name: String,
+    username: String,
+    password: String,
+    email: String,
     age: String,
-    species: String
+    q1: String,
+    q2: String,
+    q3: String
 });
 
-let Person = mongoose.model('People_Collection', personSchema);
+let User = mongoose.model('User_Collection', userSchema);
 
 exports.index = (req, res) => 
 {
-    Person.find((err, person) =>
+    User.find((err, user) =>
     {
         if(err) return console.error(err);
         res.render('index', 
         {
             title: 'Home Page',
-            people: person
+            user: user
         });
     });
 };
@@ -45,15 +49,15 @@ exports.create = (req, res) =>
     })
 }
 
-exports.createPerson= (req, res) =>
+exports.createUser= (req, res) =>
 {
-    let person = new Person({
+    let user = new User({
         name: req.body.name,
         age: req.body.age,
         species: req.body.species
     });
     
-    person.save((err, person) => {
+    user.save((err, user) => {
         if(err) return console.error(err);
         console.log(req.body.name + ' created');
     });
@@ -62,26 +66,26 @@ exports.createPerson= (req, res) =>
 
 exports.edit= (req,res) =>
 {
-    Person.findById(req.params.id, (err, person) =>
+    User.findById(req.params.id, (err, user) =>
     {
         if(err) return console.error(err);
         res.render('edit', 
         {
             title: 'Edit User',
-            person
+            user
         });
     });
 };
 
-exports.editPerson = (req,res) =>
+exports.editUser = (req,res) =>
 {
-    Person.findById(req.params.id, (err, person) =>
+    User.findById(req.params.id, (err, user) =>
     {
         if(err) return console.error(err);
-        person.name = req.body.name;
-        person.age = req.body.age;
-        person.species = req.body.species;
-        person.save((err, person) =>
+        user.name = req.body.name;
+        user.age = req.body.age;
+        user.species = req.body.species;
+        user.save((err, user) =>
         {
             if(err) return console.error(err);
             console.log(req.body.name + ' updated!');
@@ -92,10 +96,10 @@ exports.editPerson = (req,res) =>
 
 exports.delete = (req,res) =>
 {
-    Person.findByIdAndDelete(req.params.id, (err, person) =>
+    User.findByIdAndDelete(req.params.id, (err, user) =>
     {
         if(err) return console.error(err);
-        console.log(person.name + ' deleted!');
+        console.log(user.name + ' deleted!');
     });
     res.redirect('/');
 }
