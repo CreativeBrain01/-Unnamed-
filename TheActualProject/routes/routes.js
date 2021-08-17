@@ -49,12 +49,12 @@ exports.create = (req, res) =>
     })
 }
 
-exports.createUser= (req, res) =>
+exports.createUser = (req, res) =>
 {
-    let user = new User({
+    let user = new UserCollection({
         name: req.body.name,
-        age: req.body.age,
-        species: req.body.species
+        birthday: req.body.birthday,
+        password: req.body.password
     });
     
     user.save((err, user) => {
@@ -64,9 +64,9 @@ exports.createUser= (req, res) =>
     res.redirect('/');
 };
 
-exports.edit= (req,res) =>
+exports.edit = (req,res) =>
 {
-    User.findById(req.params.id, (err, user) =>
+    UserCollection.findById(req.params.id, (err, user) =>
     {
         if(err) return console.error(err);
         res.render('edit', 
@@ -79,12 +79,12 @@ exports.edit= (req,res) =>
 
 exports.editUser = (req,res) =>
 {
-    User.findById(req.params.id, (err, user) =>
+    UserCollection.findById(req.params.id, (err, user) =>
     {
         if(err) return console.error(err);
         user.name = req.body.name;
-        user.age = req.body.age;
-        user.species = req.body.species;
+        user.birthday = req.body.birthday;
+        user.password = req.body.password;
         user.save((err, user) =>
         {
             if(err) return console.error(err);
@@ -96,7 +96,7 @@ exports.editUser = (req,res) =>
 
 exports.delete = (req,res) =>
 {
-    User.findByIdAndDelete(req.params.id, (err, user) =>
+    UserCollection.findByIdAndDelete(req.params.id, (err, user) =>
     {
         if(err) return console.error(err);
         console.log(user.name + ' deleted!');
