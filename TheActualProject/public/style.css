@@ -1,0 +1,29 @@
+html {
+    background-color: rgb(202, 219, 238);
+    color: black;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+p {
+    text-align: center;
+} 
+
+h1, h3{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: azure;
+}
+
+#form {
+    max-width: 350px;
+    padding: 15px;
+    margin: auto;
+    background-color: rgb(166, 130, 255);
+}
