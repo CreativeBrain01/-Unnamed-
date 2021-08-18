@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const encrypt = require('../wordify');
 
 mongoose.Promise = global.Promise;
 
@@ -53,7 +54,7 @@ exports.createUser = (req, res) =>
 {
     let user = new UserCollection({
         username: req.body.username,
-        password: req.body.password,
+        password: encrypt.encrypt(req.body.password),
         email: req.body.email,
         age: req.body.age,
         q1: req.body.q1,
@@ -87,7 +88,7 @@ exports.editUser = (req,res) =>
     {
         if(err) return console.error(err);
         username: req.body.username;
-        password: req.body.password;
+        password: encrypt.encrypt(req.body.password);
         email: req.body.email;
         age: req.body.age;
         q1: req.body.q1;
