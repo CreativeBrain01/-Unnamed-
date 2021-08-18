@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-exports.encrpyt = (the_str) => {
+exports.encrypt = (the_str) => {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(the_str, salt, (err, my_hash) => {
             return my_hash;
