@@ -8,4 +8,8 @@ const encrpyt = the_str => {
     });
 };
 
+const isCorrectPassword = (the_str, hash) => {
+    return bcrypt.compare(the_str, hash);
+}
+
 //console.log(bcrypt.compareSync(strng, hash));
