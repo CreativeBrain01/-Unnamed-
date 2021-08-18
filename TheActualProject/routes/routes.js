@@ -127,12 +127,27 @@ exports.loggedIn = (req,res) =>
 
 exports.login= (req,res) =>
 {
-    UserCollection.findById(req.params.id, (err, user) =>
+    res.render('login', 
     {
-        if(err) return console.error(err);
-        res.render('login', 
-        {
-            title: 'Login Page'
-        });
+        title: 'Login Page'
     });
 };
+
+exports.loginTest= (req, res) =>
+{
+    UserCollection.findOne({username:req.body.username}, (err, user) =>
+    {
+        if(err) return console.error(err);
+        encrypt.isCorrectPassword(req.body.password, user.password).then(isValid =>
+            {
+                if(isValid)
+                {
+                    //Login & Create session
+                }
+                else
+                {
+                    //Wrong password/username
+                }
+            });
+    });
+}
