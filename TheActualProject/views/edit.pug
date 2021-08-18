@@ -1,0 +1,58 @@
+extends layout
+
+block content 
+    form(id='form' method='post' action='/edit/' + user.id)
+        p Username: 
+            input(type='text' name='username')
+        p Current Password: 
+            input(type='password' name='passwordConfirm')
+        p Password: 
+            input(type='password' name='password')
+        p Email: 
+            input(type='email' name='email')
+        p Age: 
+            input(type='text' name='age')
+        
+        p Question 1: Are you a human?
+            p
+                input(type='radio' id="1ans1" name="q1" value="1.1") 
+                label(for="1ans1") Yes my fellow humans 
+            p
+                input(type='radio' id="1ans2" name="q1" value="1.2")
+                label(for="1ans2") No
+            p
+                input(type='radio' id="1ans3" name="q1" value="1.3")
+                label(for="1ans3") Nope
+            p
+                input(type='radio' id="1ans4" name="q1" value="1.4")
+                label(for="1ans4") im monkey
+
+        p Question 2: What is 2+2?
+            p
+                input(type='radio' id="2ans1" name="q2" value="2.1") 
+                label(for="2ans1") 3
+            p
+                input(type='radio' id="2ans2" name="q2" value="2.2")
+                label(for="2ans2") 5
+            p
+                input(type='radio' id="2ans3" name="q2" value="2.3")
+                label(for="2ans3") 22
+            p
+                input(type='radio' id="2ans4" name="q2" value="2.4")
+                label(for="2ans4") 3.082323723i
+
+        p Question 3: Are you a cool gamer
+            p
+                input(type='radio' id="3ans1" name="q3" value="3.1") 
+                label(for="3ans1") Yes, I play games only on epic games launcher
+            p
+                input(type='radio' id="3ans2" name="q3" value="3.2")
+                label(for="3ans2") Yes, I play games only on the origin launcher
+            p
+                input(type='radio' id="3ans3" name="q3" value="3.3")
+                label(for="3ans3") Yes, I play games only on mobile
+            p
+                input(type='radio' id="3ans4" name="q3" value="3.4")
+                label(for="3ans4") No, I play games on Steam
+        p 
+            input(type='submit' value='Update User')

@@ -111,3 +111,27 @@ exports.delete = (req,res) =>
     });
     res.redirect('/');
 }
+
+exports.loggedIn = (req,res) =>
+{
+    UserCollection.findById(req.params.id, (err, user) =>
+    {
+        if(err) return console.error(err);
+        res.render('loggedIn', 
+        {
+            title: 'Logged In Page'
+        });
+    });
+};
+
+exports.login= (req,res) =>
+{
+    UserCollection.findById(req.params.id, (err, user) =>
+    {
+        if(err) return console.error(err);
+        res.render('login', 
+        {
+            title: 'Login Page'
+        });
+    });
+};
