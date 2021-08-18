@@ -20,5 +20,7 @@ app.post('/create', urlencodedParser, routes.createUser);
 app.get('/edit/:id', routes.edit);
 app.post('/edit/:id', urlencodedParser, routes.editUser);
 app.get('/delete/:id', routes.delete);
+app.get('/login', routes.login);
+app.post('/login', urlencodedParser, routes.login);
 
 app.listen(3000);
