@@ -136,6 +136,8 @@ exports.login= (req,res) =>
     });
 };
 
+const expressSession = require('express-session');
+
 exports.loginTest= (req, res) =>
 {
     UserCollection.findOne({username:req.body.username}, (err, user) =>
@@ -146,6 +148,7 @@ exports.loginTest= (req, res) =>
                 if(isValid)
                 {
                     //Login & Create session
+                    expressSession.Session.connect
                 }
                 else
                 {

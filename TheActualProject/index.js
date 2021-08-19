@@ -6,6 +6,12 @@ const expressSession = require('express-session');
 
 const app = express();
 
+app.use(expressSession({
+    secret: 'Suction Cup Man Is Coming Around',
+    saveUninitialized: true,
+    resave: true
+}));
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -13,18 +19,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 let urlencodedParser = express.urlencoded({ extended: false });
 
 app.use(expressSession({
-    secret: 'wh4t3v3r',
+    secret: 'CAN’T GO DOWN DUMBA**! I CAN ONLY GO UP',
     saveUninitialized: true,
     resave: true
 }));
-
-const checkAuth = (req, res, next) => {
-    if(req.session.user && req.session.user.isAuthenticated) {
-        next();
-    } else {
-        res.redirect('/');
-    }
-};
 
 app.get('/', routes.index);
 app.get('/create', routes.create);
