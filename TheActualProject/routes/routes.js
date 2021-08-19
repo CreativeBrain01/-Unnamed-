@@ -114,8 +114,6 @@ exports.delete = (req,res) =>
     res.redirect('/');
 }
 
-
-
 exports.loggedIn = (req,res) =>
 {
     UserCollection.findById(req.params.id, (err, user) =>
@@ -136,24 +134,14 @@ exports.login= (req,res) =>
     });
 };
 
-const expressSession = require('express-session');
-
-exports.loginTest= (req, res) =>
+exports.loginTest= (username) =>
 {
-    UserCollection.findOne({username:req.body.username}, (err, user) =>
+    UserCollection.findOne({username}, (err, user) =>
     {
         if(err) return console.error(err);
         encrypt.isCorrectPassword(req.body.password, user.password).then(isValid =>
             {
-                if(isValid)
-                {
-                    //Login & Create session
-                    expressSession.Session.connect
-                }
-                else
-                {
-                    //Wrong password/username
-                }
+                return isValid;
             });
     });
 }
