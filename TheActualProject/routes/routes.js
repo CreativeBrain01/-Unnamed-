@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const encrypt = require('../wordify');
 
+//#region Mongoose
 mongoose.Promise = global.Promise;
-
 mongoose.connect('mongodb+srv://Admin:12354@cluster0.ezojw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
 {
     useUnifiedTopology: true,
@@ -27,6 +28,7 @@ let userSchema = mongoose.Schema
 });
 
 let UserCollection = mongoose.model('User_Collection', userSchema);
+//#endregion
 
 exports.index = (req, res) => 
 {
@@ -53,7 +55,7 @@ exports.createUser = (req, res) =>
 {
     let user = new UserCollection({
         username: req.body.username,
-        password: req.body.password,
+        password: encrypt.encrypt(req.body.password),
         email: req.body.email,
         age: req.body.age,
         q1: req.body.q1,
@@ -87,7 +89,7 @@ exports.editUser = (req,res) =>
     {
         if(err) return console.error(err);
         username: req.body.username;
-        password: req.body.password;
+        password: encrypt.encrypt(req.body.password);
         email: req.body.email;
         age: req.body.age;
         q1: req.body.q1;
@@ -110,4 +112,48 @@ exports.delete = (req,res) =>
         console.log(user.name + ' deleted!');
     });
     res.redirect('/');
+}
+
+
+
+exports.loggedIn = (req,res) =>
+{
+    UserCollection.findById(req.params.id, (err, user) =>
+    {
+        if(err) return console.error(err);
+        res.render('loggedIn', 
+        {
+            title: 'Logged In Page'
+        });
+    });
+};
+
+exports.login= (req,res) =>
+{
+    res.render('login', 
+    {
+        title: 'Login Page'
+    });
+};
+
+const expressSession = require('express-session');
+
+exports.loginTest= (req, res) =>
+{
+    UserCollection.findOne({username:req.body.username}, (err, user) =>
+    {
+        if(err) return console.error(err);
+        encrypt.isCorrectPassword(req.body.password, user.password).then(isValid =>
+            {
+                if(isValid)
+                {
+                    //Login & Create session
+                    expressSession.Session.connect
+                }
+                else
+                {
+                    //Wrong password/username
+                }
+            });
+    });
 }

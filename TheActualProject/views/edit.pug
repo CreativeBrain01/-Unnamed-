@@ -1,9 +1,11 @@
 extends layout
 
 block content 
-    form(id='form' method='post' action='/create')
+    form(id='form' method='post' action='/edit/' + user.id)
         p Username: 
             input(type='text' name='username')
+        p Current Password: 
+            input(type='password' name='passwordConfirm')
         p Password: 
             input(type='password' name='password')
         p Email: 
@@ -53,4 +55,4 @@ block content
                 input(type='radio' id="3ans4" name="q3" value="3.4")
                 label(for="3ans4") No, I play games on Steam
         p 
-            input(type='submit' value='Add Person')
+            input(type='submit' value='Update User')
