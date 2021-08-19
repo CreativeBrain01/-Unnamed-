@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const encrypt = require('../wordify');
 
+//#region Mongoose
 mongoose.Promise = global.Promise;
-
 mongoose.connect('mongodb+srv://Admin:12354@cluster0.ezojw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
 {
     useUnifiedTopology: true,
@@ -28,6 +28,7 @@ let userSchema = mongoose.Schema
 });
 
 let UserCollection = mongoose.model('User_Collection', userSchema);
+//#endregion
 
 exports.index = (req, res) => 
 {
@@ -112,6 +113,8 @@ exports.delete = (req,res) =>
     });
     res.redirect('/');
 }
+
+
 
 exports.loggedIn = (req,res) =>
 {
