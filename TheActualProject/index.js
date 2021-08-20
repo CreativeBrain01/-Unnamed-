@@ -39,8 +39,6 @@ app.post('/login', urlencodedParser, (req, res) => {
         //Login Fail
         res.redirect('/'); //tell user login info is incorrect
     }
-
-    res.redirect(routes.loginTest);
 });
 
 app.get('logout', (req, res) => {
