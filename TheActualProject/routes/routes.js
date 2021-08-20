@@ -53,7 +53,6 @@ exports.create = (req, res) =>
 
 exports.createUser = (req, res) =>
 {
-    console.log(encrypt.encrypt(req.body.pword));
     let user = new UserCollection({
         username: req.body.username,
         password: encrypt.encrypt(req.body.pword),
@@ -139,10 +138,6 @@ exports.loginTest= (username, pword) =>
 {
     UserCollection.findOne({username}, (err, user) =>
     {
-        console.log(username);
-        console.log(user.username);
-        console.log(user.password);
-
         if(err) return console.error(err);
         return encrypt.isCorrectPassword(pword, user.password)
     });
