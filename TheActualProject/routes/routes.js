@@ -144,9 +144,6 @@ exports.loginTest= (username, pword) =>
         console.log(user.password);
 
         if(err) return console.error(err);
-        encrypt.isCorrectPassword(pword, user.password).then(isValid =>
-            {
-                return isValid;
-            });
+        return encrypt.isCorrectPassword(pword, user.password)
     });
 }
