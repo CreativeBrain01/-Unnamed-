@@ -53,9 +53,10 @@ exports.create = (req, res) =>
 
 exports.createUser = (req, res) =>
 {
+    console.log(encrypt.encrypt(req.body.pword));
     let user = new UserCollection({
         username: req.body.username,
-        password: encrypt.encrypt(req.body.password),
+        password: encrypt.encrypt(req.body.pword),
         email: req.body.email,
         age: req.body.age,
         q1: req.body.q1,
@@ -65,7 +66,7 @@ exports.createUser = (req, res) =>
     
     user.save((err, user) => {
         if(err) return console.error(err);
-        console.log(req.body.name + ' created');
+        console.log(req.body.username + ' created');
     });
     res.redirect('/');
 };
@@ -138,6 +139,10 @@ exports.loginTest= (username, pword) =>
 {
     UserCollection.findOne({username}, (err, user) =>
     {
+        console.log(username);
+        console.log(user.username);
+        console.log(user.password);
+
         if(err) return console.error(err);
         encrypt.isCorrectPassword(pword, user.password).then(isValid =>
             {
