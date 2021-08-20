@@ -27,7 +27,7 @@ app.get('/delete/:id', routes.delete);
 app.get('/login', routes.login);
 
 app.post('/login', urlencodedParser, (req, res) => {
-    if(routes.loginTest(req.body.username, req.body.password))
+    if(routes.loginTest(req.body.username, req.body.pword))
     {
         //Login Success
         req.session.user = {
@@ -37,7 +37,7 @@ app.post('/login', urlencodedParser, (req, res) => {
         res.redirect('/loggedIn'); //redirect to user page
     } else {
         //Login Fail
-        res.redirect('/'); //tell user login info is incorrect
+        res.redirect('/'); //tell user that the login info is incorrect
     }
 });
 
