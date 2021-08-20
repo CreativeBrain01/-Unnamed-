@@ -27,7 +27,7 @@ app.get('/delete/:id', routes.delete);
 app.get('/login', routes.login);
 
 app.post('/login', urlencodedParser, (req, res) => {
-    if(routes.loginTest(req.body.username))
+    if(routes.loginTest(req.body.username, req.body.password))
     {
         //Login Success
         req.session.user = {
