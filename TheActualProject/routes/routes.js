@@ -134,12 +134,12 @@ exports.login= (req,res) =>
     });
 };
 
-exports.loginTest= (username, password) =>
+exports.loginTest= (username, pword) =>
 {
     UserCollection.findOne({username}, (err, user) =>
     {
         if(err) return console.error(err);
-        encrypt.isCorrectPassword(password, user.password).then(isValid =>
+        encrypt.isCorrectPassword(pword, user.password).then(isValid =>
             {
                 return isValid;
             });
