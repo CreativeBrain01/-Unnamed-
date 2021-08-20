@@ -1,9 +1,9 @@
 html {
-    background-color: rgb(202, 219, 238);
+    background-color: rgb(121, 16, 64);
     color: black;
     max-width: 1200px;
     margin: 0 auto;
-    /* font-family: 'Merriweather', serif; */
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 p {
@@ -11,20 +11,23 @@ p {
 } 
 
 h1, h3{
-    padding: 5px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgb(254, 159, 144);
 }
 
 body {
-    background-color: azure;
+    background-color: rgb(213, 121, 163);
+    border: rgb(65, 9, 0);
+    border-style: dotted;
 }
 
 #form {
     max-width: 350px;
     padding: 15px;
     margin: auto;
-    background-color: rgb(166, 130, 255);
+    background-color: rgb(106, 188, 131);
 }
