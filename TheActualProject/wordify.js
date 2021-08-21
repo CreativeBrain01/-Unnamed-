@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 
 exports.encrypt = (the_str) => {
     let my_salt = bcrypt.genSaltSync(10);
-    let my_hash = bcrypt.hashSync('bacon', my_salt);
+    let my_hash = bcrypt.hashSync(the_str, my_salt);
     return my_hash;
 };
 

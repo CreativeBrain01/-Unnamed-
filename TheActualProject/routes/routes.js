@@ -55,7 +55,7 @@ exports.createUser = (req, res) =>
 {
     let user = new UserCollection({
         username: req.body.username,
-        password: encrypt.encrypt(req.body.pword),
+        password: encrypt.encrypt(req.body.password),
         email: req.body.email,
         age: req.body.age,
         q1: req.body.q1,
@@ -67,6 +67,8 @@ exports.createUser = (req, res) =>
         if(err) return console.error(err);
         console.log(req.body.username + ' created');
     });
+
+    console.log(req.body.password);
     res.redirect('/');
 };
 
@@ -134,11 +136,20 @@ exports.login= (req,res) =>
     });
 };
 
-exports.loginTest= (username, pword) =>
+exports.loginTest = async function loginTest(username, pword)
 {
-    UserCollection.findOne({username}, (err, user) =>
+    var usernameInput = {"username": username};
+    var foundUsers;
+    await UserCollection.find(usernameInput, (err, users) =>
     {
         if(err) return console.error(err);
-        return encrypt.isCorrectPassword(pword, user.password)
+        console.log("A " + foundUsers);
+        foundUsers = users;
+        console.log("B " + foundUsers);
+    }).then(() => {
+        console.log("C " + foundUsers);
+        console.log(pword);
+        console.log(foundUsers[0].password);
+        return encrypt.isCorrectPassword(pword, foundUsers[0].password);
     });
 }

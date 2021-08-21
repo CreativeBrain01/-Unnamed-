@@ -27,8 +27,11 @@ app.get('/delete/:id', routes.delete);
 app.get('/login', routes.login);
 
 app.post('/login', urlencodedParser, (req, res) => {
-    if(routes.loginTest(req.body.username, req.body.pword))
+    var canLogin = routes.loginTest(req.body.username, req.body.pword);
+    console.log("canLogin: " + canLogin);
+    if(canLogin)
     {
+        console.log("Success");
         //Login Success
         req.session.user = {
             isAuthenticated: true,
@@ -37,6 +40,7 @@ app.post('/login', urlencodedParser, (req, res) => {
         res.redirect('/loggedIn'); //redirect to user page
     } else {
         //Login Fail
+        console.log("Fail");
         res.redirect('/'); //tell user that the login info is incorrect
     }
 });
