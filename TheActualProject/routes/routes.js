@@ -87,20 +87,22 @@ exports.edit = (req,res) =>
 
 exports.editUser = (req,res) =>
 {
-    UserCollection.findById(req.params.id, (err, user) =>
+    console.log(req.session.user);
+    UserCollection.findById(req.session.user.id, (err, user) =>
     {
+        console.log(user);
         if(err) return console.error(err);
-        username: req.body.username;
-        password: encrypt.encrypt(req.body.password);
-        email: req.body.email;
-        age: req.body.age;
-        q1: req.body.q1;
-        q2: req.body.q2;
-        q3: req.body.q3;
+        user.username= req.body.username;
+        user.password= encrypt.encrypt(req.body.password);
+        user.email= req.body.email;
+        user.age= req.body.age;
+        user.q1= req.body.q1;
+        user.q2= req.body.q2;
+        user.q3= req.body.q3;
         user.save((err, user) =>
         {
             if(err) return console.error(err);
-            console.log(req.body.name + ' updated!');
+            console.log(user.username + ' updated!');
         });
     });
     res.redirect('/');
@@ -118,12 +120,14 @@ exports.delete = (req,res) =>
 
 exports.loggedIn = (req,res) =>
 {
-    UserCollection.findById(req.params.id, (err, user) =>
+    UserCollection.findById(req.session.user.id, (err, user) =>
     {
         if(err) return console.error(err);
+        console.log(user, req.session.user);
         res.render('loggedIn', 
         {
-            title: 'Logged In Page'
+            title: 'Logged In Page',
+            user
         });
     });
 };
@@ -140,16 +144,18 @@ exports.loginTest = async function loginTest(username, pword)
 {
     var usernameInput = {"username": username};
     var foundUsers;
-    await UserCollection.find(usernameInput, (err, users) =>
+    console.log(usernameInput);
+    return await UserCollection.find(usernameInput, (err, users) =>
     {
-        if(err) return console.error(err);
-        console.log("A " + foundUsers);
-        foundUsers = users;
-        console.log("B " + foundUsers);
-    }).then(() => {
+        //if(err) return console.error(err);
+        //console.log("A " + foundUsers);
+        //foundUsers = users;
+        //console.log("B " + foundUsers);
+    }).then((foundUsers) => {
         console.log("C " + foundUsers);
         console.log(pword);
         console.log(foundUsers[0].password);
-        return encrypt.isCorrectPassword(pword, foundUsers[0].password);
+        
+        return [encrypt.isCorrectPassword(pword, foundUsers[0].password), foundUsers[0]._id];
     });
 }

@@ -25,24 +25,32 @@ app.get('/edit/:id', routes.edit);
 app.post('/edit/:id', urlencodedParser, routes.editUser);
 app.get('/delete/:id', routes.delete);
 app.get('/login', routes.login);
+app.get('/loggedIn', routes.loggedIn);
+
 
 app.post('/login', urlencodedParser, (req, res) => {
-    var canLogin = routes.loginTest(req.body.username, req.body.pword);
-    console.log("canLogin: " + canLogin);
-    if(canLogin)
+    var results = routes.loginTest(req.body.username, req.body.pword);
+    results.then(results =>
     {
-        console.log("Success");
-        //Login Success
-        req.session.user = {
-            isAuthenticated: true,
-            username: req.body.username
+        var canLogin = results[0];
+        var id = results[1];
+        console.log("canLogin: " + canLogin, results);
+        if(canLogin)
+        {
+            console.log("Success");
+            //Login Success
+            req.session.user = {
+                isAuthenticated: true,
+                username: req.body.username,
+                id
+            }
+            res.redirect('/loggedIn'); //redirect to user page
+        } else {
+            //Login Fail
+            console.log("Fail");
+            res.redirect('/'); //tell user that the login info is incorrect
         }
-        res.redirect('/loggedIn'); //redirect to user page
-    } else {
-        //Login Fail
-        console.log("Fail");
-        res.redirect('/'); //tell user that the login info is incorrect
-    }
+    })
 });
 
 app.get('logout', (req, res) => {
