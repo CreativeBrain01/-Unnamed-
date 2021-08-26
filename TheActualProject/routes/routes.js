@@ -140,6 +140,27 @@ exports.login= (req,res) =>
     });
 };
 
+exports.api = (req,res) =>
+{
+    let questionData = 
+    {
+        q1: {"1.1":0,"1.2":0,"1.3":0,"1.4":0},  
+        q2: {"2.1":0,"2.2":0,"2.3":0,"2.4":0},
+        q3: {"3.1":0,"3.2":0,"3.3":0,"3.4":0}
+    }
+
+    UserCollection.find( {}, (err, users) =>
+    {
+        users.forEach(user => 
+        {
+            questionData.q1[user.q1]++,
+            questionData.q2[user.q2]++,
+            questionData.q3[user.q3]++
+        }) 
+        res.json(questionData);
+    });
+}
+
 exports.loginTest = async function loginTest(username, pword)
 {
     var usernameInput = {"username": username};

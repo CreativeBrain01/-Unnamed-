@@ -26,6 +26,7 @@ app.post('/edit/:id', urlencodedParser, routes.editUser);
 app.get('/delete/:id', routes.delete);
 app.get('/login', routes.login);
 app.get('/loggedIn', routes.loggedIn);
+app.get('/api', routes.api);
 
 
 app.post('/login', urlencodedParser, (req, res) => {
