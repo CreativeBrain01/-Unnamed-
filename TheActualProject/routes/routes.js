@@ -38,7 +38,8 @@ exports.index = (req, res) =>
         res.render('index', 
         {
             title: 'Home Page',
-            user: user
+            user: user,
+            apiInfo: this.api
         });
     });
 };
@@ -156,7 +157,7 @@ exports.api = (req,res) =>
             questionData.q1[user.q1]++,
             questionData.q2[user.q2]++,
             questionData.q3[user.q3]++
-        }) 
+        });
         res.json(questionData);
     });
 }
@@ -168,10 +169,6 @@ exports.loginTest = async function loginTest(username, pword)
     console.log(usernameInput);
     return await UserCollection.find(usernameInput, (err, users) =>
     {
-        //if(err) return console.error(err);
-        //console.log("A " + foundUsers);
-        //foundUsers = users;
-        //console.log("B " + foundUsers);
     }).then((foundUsers) => {
         console.log("C " + foundUsers);
         console.log(pword);

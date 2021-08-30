@@ -19,6 +19,9 @@ app.use(expressSession({
 }));
 
 app.get('/', routes.index);
+
+
+
 app.get('/create', routes.create);
 app.post('/create', urlencodedParser, routes.createUser);
 app.get('/edit/:id', routes.edit);
