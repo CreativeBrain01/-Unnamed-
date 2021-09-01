@@ -30,8 +30,22 @@ let userSchema = mongoose.Schema
 let UserCollection = mongoose.model('User_Collection', userSchema);
 //#endregion
 
+var visited = 0;
+
 exports.index = (req, res) => 
 {
+    visited++;
+    let cookieMessage = "";
+    res.cookie('visited', visited, {maxAge: 999999999});
+    if(req.cookies.beenHereBefore === 'yes')
+    {
+        cookieMessage = 'You have visted this page ' + (parseInt(req.cookies.visited) + 1) + " times.";
+    }
+    else {
+        res.cookie('beenHereBefore', 'yes', {maxAge: 999999999});
+        res.cookie('visited', 0, {maxAge: 999999999});
+        cookieMessage = 'Here is your first cookie';
+    }
     UserCollection.find((err, user) =>
     {
         if(err) return console.error(err);
@@ -39,7 +53,8 @@ exports.index = (req, res) =>
         {
             title: 'Home Page',
             user: user,
-            apiInfo: this.api
+            apiInfo: this.api,
+            cookieMessage
         });
     });
 };

@@ -3,8 +3,20 @@ extends layout
 block content 
     title
     p 
-        img(width=300 src='https://images-na.ssl-images-amazon.com/images/I/81s8xJUzWGL.jpg')
+        img(id='image' width=300 src='https://images-na.ssl-images-amazon.com/images/I/81s8xJUzWGL.jpg')
     p
         a(href='/create') Create New User
     p 
         a(href='/login') Login
+    h3 Which Answers were Given to the Login Questions: 
+    h2 Question 1:
+    h2 Are You a Human?
+    canvas(id='canvas')
+    h2 Question 2:
+    h2 What is 2+2?
+    canvas(id='canvas2')
+    h2 Question 3:
+    h2 Are you a cool gamer?
+    canvas(id='canvas3')
+    p #{cookieMessage}
+    script(src="./canvas.js") 

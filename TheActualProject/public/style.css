@@ -10,6 +10,14 @@ p {
     text-align: center;
 } 
 
+h2 {
+    font-style: italic;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 h1, h3{
     padding: 10px;
     display: flex;
@@ -17,11 +25,12 @@ h1, h3{
     justify-content: center;
     align-items: center;
     background-color: rgb(254, 159, 144);
+    border: white dotted;
 }
 
 body {
     background-color: rgb(213, 121, 163);
-    border: rgb(65, 9, 0);
+    border: rgb(65, 9, 0) dotted;
     border-style: dotted;
 }
 
@@ -30,4 +39,41 @@ body {
     padding: 15px;
     margin: auto;
     background-color: rgb(106, 188, 131);
+}
+
+#canvas {
+    background-color: rgb(106, 188, 131);
+    padding: 30px;
+    margin-left: 450px;
+    border: dotted;
+}
+
+#drawGraph {
+    align-items: center;
+}
+
+#canvas2 {
+    background-color: rgb(106, 188, 131);
+    padding: 30px;
+    margin-left: 450px;
+    border: dotted;
+}
+
+#drawGraph2 {
+    align-items: center;
+}
+
+#canvas3 {
+    background-color: rgb(106, 188, 131);
+    padding: 30px;
+    margin-left: 380px;
+    border: dotted;
+}
+
+#drawGraph3 {
+    align-items: center;
+}
+
+#image {
+    border: dotted;
 }

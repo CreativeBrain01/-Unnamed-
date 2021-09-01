@@ -3,8 +3,10 @@ const pug = require('pug');
 const routes = require('./routes/routes');
 const path = require('path');
 const expressSession = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const app = express();
+app.use(cookieParser());
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
